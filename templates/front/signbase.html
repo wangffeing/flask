@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <script src="{{ url_for('static',filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+
+    <script src="{{ url_for('static',filename='common/zlparam.js') }}"></script>
+    <script src="{{ url_for('static',filename="common/zlajax.js") }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='common/sweetalert/sweetalert.css') }}">
+    <script src="{{ url_for('static',filename='common/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='common/sweetalert/zlalert.js') }}"></script>
+    <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+
+     <link rel="stylesheet" href="{{ url_for('static',filename='front/css/front_signbase.css') }}">
+
+    {% block head %}
+
+    {% endblock %}
+
+</head>
+<body>
+
+    <div class="outer-box">
+        <div class="logo-box">
+            <a href="/">
+                <img src="{{ url_for('static',filename='common/images/15.png') }}" alt="">
+            </a>
+        </div>
+
+        <h2 class="page-title">
+            {% block h2_block %}
+
+            {% endblock %}
+        </h2>
+
+        <div class="sign-box">
+            {% block signbox %}
+
+            {% endblock %}
+        </div>
+        <span style="display: none" id="return-to-span">{{ return_to }}</span>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'pcenter/pc_base.html' %}
+
+{% block title %}
+    修改头像
+{% endblock %}
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/css/fileinput.min.css"/>
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/js/fileinput.min.js"></script>
+{% endblock %}
+
+{% block main_content %}
+    <form class="avatar-input-form" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input name="avatar_upload" type="file" class="file" data-show-preview="true"/>
+    </form>
+{% endblock %}

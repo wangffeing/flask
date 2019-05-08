@@ -1,0 +1,53 @@
+{% extends 'pcenter/pc_base.html' %}
+
+{% block title %}
+    个人信息
+{% endblock %}
+
+{% block page_title %}
+    {{ self.title() }}
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main_content %}
+    {% set user=g.user %}
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>用户名：</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <td>在线编号：</td>
+                <td>{{ user.zxbh }}</td>
+            </tr>
+            <tr>
+                <td>角色：</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role.name }}
+                        {% if not loop.last %},{% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>权限：</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role.desc }}
+                        {% if not loop.last %}/{% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>加入时间：</td>
+                <td>{{ user.join_time }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'front/front_base.html' %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+
+{% block head %}
+    <script src="{{ url_for('static',filename='ueditor/ueditor.config.js') }}"></script>
+    <script src="{{ url_for('static',filename='ueditor/ueditor.all.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='front/js/front_pdetail.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='front/css/front_pdetail.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="lg-container">
+        <div class="post-container">
+            <h2>{{ post.title }}</h2>
+            <p class="post-info-group">
+                <span>发表时间：{{ post.create_time }}</span>
+                <span>作者：{{ post.author.username }}</span>
+                <span>所属板块：{{ post.board.name }}</span>
+                <span>阅读数：{{ post.read_count }}</span>
+                <span>评论数：{{ post.comments|length }}</span>
+            </p>
+            <article class="post-content" id="post-content" data-id="{{ post.id }}">
+                {{ post.content|safe }}
+            </article>
+
+            {% if g.front_user %}
+                {% if g.front_user.is_voted(post.id) %}
+                    <button class="btn btn-success">已赞</button>
+                {% elif g.front_user != post.author %}
+                    <button class="btn btn-default btn-sm vote-post" id="{{ post.id }}">
+                        <span class="voted">
+                        觉得不错？
+                        </span>
+                    </button>
+                {% endif %}
+            {% endif %}
+            <button class="btn btn-info">{{ post.vote|length }}个赞</button>
+        </div>
+        <div class="comment-group">
+            <h3>评论列表</h3>
+            <ul class="comment-list-group">
+                {% for comment in post.comments %}
+                    <li>
+                        <div class="avatar-group">
+                            <img src="{{ url_for('static',filename=comment.author.avatar) }}" alt="">
+                        </div>
+                        <div class="comment-content">
+                            <p class="author-info">
+                                <span>{{ comment.author.username }}</span>
+                                <span>{{ comment.create_time }}</span>
+                            </p>
+                            <p class="comment-txt">
+                                {{ comment.content|safe }}
+                            </p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="add-comment-group">
+            <h3>发表评论</h3>
+            <script id="editor" type="text/plain" style="height:100px;"></script>
+            <div class="comment-btn-group">
+            <button class="btn btn-primary" id="comment-btn">发表评论</button>
+        </div>
+    </div>
+    </div>
+    <div class="sm-container">
+    </div>
+{% endblock %}

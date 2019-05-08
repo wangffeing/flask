@@ -1,0 +1,47 @@
+{% extends 'pcenter/pc_base.html' %}
+
+{% block title %}
+    评论管理-后台管理
+{% endblock %}
+
+{% block page_title %}
+    评论管理
+{% endblock %}
+
+{% block head %}
+    <script src="{{ url_for('static', filename='pcenter/js/comments.js')}}"></script>
+{% endblock %}
+
+{% block main_content %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>帖子标题</th>
+                <th>评论</th>
+                <th>发布时间</th>
+                <th>作者</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <div>
+            {% for comment in comments %}
+                <tr data-id="{{ comment.id }}">
+                    <td><a target="_blank" href="{{ url_for("front.post_detail",post_id=comment.post.id) }}">{{ comment.post.title }}</a></td>
+                    <td>{{ comment.content }}</td>
+                    <td>{{ comment.create_time }}</td>
+{#                    <td>{{ comment.post.board.name }}</td>#}
+                    <td>{{ comment.author.username }}</td>
+                    <td>
+                        <button class="btn delete-button btn-xs delete-comment-btn">移除</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </div>
+
+            <div style="text-align: center;">
+                {{ pagination.links }}
+            </div>
+        </tbody>
+    </table>
+{% endblock %}

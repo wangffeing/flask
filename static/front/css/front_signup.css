@@ -1,0 +1,16 @@
+.sign-box {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.captcha-addon {
+    padding: 0;
+    overflow: hidden;
+}
+
+.captcha-img {
+    width: 94px;
+    height: 32px;
+    cursor: pointer;
+}
